@@ -34,19 +34,19 @@ use Google\Shopping\Merchant\Inventories\V1beta\DeleteRegionalInventoryRequest;
  * Once you have received a successful delete response, wait for that
  * period before attempting a delete again.
  *
- * This sample has been automatically generated and should be regarded as a code
- * template only. It will require modifications to work:
- *  - It may require correct/in-range values for request initialization.
- *  - It may require specifying regional endpoints when creating the service client,
- *    please see the apiEndpoint client configuration option for more details.
+ * @param string $formattedName The name of the `RegionalInventory` resource to delete.
+ *                              Format:
+ *                              `accounts/{account}/products/{product}/regionalInventories/{region}`
+ *                              Please see {@see RegionalInventoryServiceClient::regionalInventoryName()} for help formatting this field.
  */
-function delete_regional_inventory_sample(): void
+function delete_regional_inventory_sample(string $formattedName): void
 {
     // Create a client.
     $regionalInventoryServiceClient = new RegionalInventoryServiceClient();
 
     // Prepare the request message.
-    $request = new DeleteRegionalInventoryRequest();
+    $request = (new DeleteRegionalInventoryRequest())
+        ->setName($formattedName);
 
     // Call the API and handle any network failures.
     try {
@@ -55,5 +55,25 @@ function delete_regional_inventory_sample(): void
     } catch (ApiException $ex) {
         printf('Call failed with message: %s' . PHP_EOL, $ex->getMessage());
     }
+}
+
+/**
+ * Helper to execute the sample.
+ *
+ * This sample has been automatically generated and should be regarded as a code
+ * template only. It will require modifications to work:
+ *  - It may require correct/in-range values for request initialization.
+ *  - It may require specifying regional endpoints when creating the service client,
+ *    please see the apiEndpoint client configuration option for more details.
+ */
+function callSample(): void
+{
+    $formattedName = RegionalInventoryServiceClient::regionalInventoryName(
+        '[ACCOUNT]',
+        '[PRODUCT]',
+        '[REGION]'
+    );
+
+    delete_regional_inventory_sample($formattedName);
 }
 // [END merchantapi_v1beta_generated_RegionalInventoryService_DeleteRegionalInventory_sync]
